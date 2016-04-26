@@ -113,6 +113,14 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 
 	##~~ SettingsPlugin mixin
 
+	def get_settings_defaults(self):
+		return dict(pwrOnName="On",
+			    pwrOffName="Off",
+			    relayOneName="Printer“,
+			    relayTwoName="Light“,
+			    showPwrOneStatus=True,
+			    showPwrTwoStatus=False)
+
 	def on_settings_save(self,data):
 		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 

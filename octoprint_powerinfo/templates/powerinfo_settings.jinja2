@@ -1,6 +1,43 @@
 <h4>Powerinfo settings for Raspberry Pi</h4>
-
+The plugin monitors the state of a 2 channel Raspberry Pi relay card (e.g. SainSmart).<br />
+<br />
+<h5>Input configuration</h5>
+Specifiy the relay input pins on the pi (not the GPIO number).<br />
+<br />
 <form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">{{ _('relay 1 input pin') }}</label>
+        <div class="controls">
+            <div class="input-append">
+                <input type="number" step="1" min="0" max="40" class="input-mini text-right" data-bind="value: settings.plugins.powerinfo.inOnePin">
+                <span class="add-on">Pin</span>
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">{{ _('relay 2 input pin') }}</label>
+        <div class="controls">
+            <div class="input-append">
+                <input type="number" step="1" min="0" max="40" class="input-mini text-right" data-bind="value: settings.plugins.powerinfo.inTwoPin">
+                <span class="add-on">Pin</span>
+            </div>
+        </div>
+    </div>
+</form>
+<h5>Output configuration</h5>
+Specify the refresh rate of the plugin and the labels for the relays and states.<br />
+Refresh rates lower than 5 seconds will impact overall performance!<br />
+<br />
+<form class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">{{ _('refresh rate') }}</label>
+        <div class="controls">
+            <div class="input-append">
+                <input type="number" step="1" min="1" max="30" class="input-mini text-right" data-bind="value: settings.plugins.powerinfo.rRate">
+                <span class="add-on">seconds</span>
+            </div>
+        </div>
+    </div>
     <div class="control-group">
         <label class="control-label">{{ _('Label for power on') }}</label>
         <div class="controls">
@@ -14,13 +51,13 @@
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('Label for Relay 1') }}</label>
+        <label class="control-label">{{ _('Label for relay 1') }}</label>
         <div class="controls">
             <input type="text" class="input-block-level" data-bind="value: settings.plugins.powerinfo.relayOneName">
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('Relay 1') }}</label>
+        <label class="control-label">{{ _('relay 1') }}</label>
         <div class="controls">
             <label class="checkbox">
                 <input type="checkbox" data-bind="checked: settings.plugins.powerinfo.showPwrOneStatus"> Show the status      
@@ -28,13 +65,13 @@
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('Label for Relay 2') }}</label>
+        <label class="control-label">{{ _('Label for relay 2') }}</label>
         <div class="controls">
             <input type="text" class="input-block-level" data-bind="value: settings.plugins.powerinfo.relayTwoName">
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('Relay 2') }}</label>
+        <label class="control-label">{{ _('relay 2') }}</label>
         <div class="controls">
             <label class="checkbox">
                 <input type="checkbox" data-bind="checked: settings.plugins.powerinfo.showPwrTwoStatus"> Show the status

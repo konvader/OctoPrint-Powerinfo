@@ -9,6 +9,7 @@ import RPi.GPIO as GPIO
 import sys
 
 class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
+		      octoprint.plugin.ShutdownPlugin,
 		      octoprint.plugin.SettingsPlugin,
                       octoprint.plugin.AssetPlugin,
                       octoprint.plugin.TemplatePlugin,
@@ -18,6 +19,8 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 
 	def __init__(self):
 		self._checkPwrStatusTimer = None
+		self.inOnePin = ""
+		self.inTwoPin = ""
 		self.isRaspi = False
 		self.pwrOnName = ""
 		self.pwrOffName = ""
@@ -26,6 +29,7 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 		self.relayOneName = ""
 		self.relayTwoName = ""
 		self.rOneMessage = ""
+		self.rRate = ""
 		self.rTwoMessage = ""
 		self.showPwrOneStatus = False
 		self.showPwrTwoStatus = False
@@ -34,14 +38,17 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 
 	def on_after_startup(self):
 		# Get our settings
+		self.inOnePin = int(self._settings.get(["inOnePin"]))
+		self.inTwoPin = int(self._settings.get(["inTwoPin"]))
 		self.pwrOnName = self._settings.get(["pwrOnName"])
 		self.pwrOffName = self._settings.get(["pwrOffName"])
 		self.relayOneName = self._settings.get(["relayOneName"])
 		self.relayTwoName = self._settings.get(["relayTwoName"])
+		self.rRate = int(self._settings.get(["rRate"]))
                 self.showPwrOneStatus = self._settings.get(["showPwrOneStatus"])
                 self.showPwrTwoStatus = self._settings.get(["showPwrTwoStatus"])
 
-		self._logger.info("Powerinfo plugin started")
+		self._logger.debug("Powerinfo plugin started")
 
 		if sys.platform == "linux2":
 		    with open('/proc/cpuinfo', 'r') as infile:
@@ -53,39 +60,39 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 			# The hardware is not a pi.
 			self.isRaspi = False
 		    elif match.group(1) == 'BCM2708':
-			self._logger.info("Pi 1")
+			self._logger.debug("Pi 1")
 			self.isRaspi = True
 		    elif match.group(1) == 'BCM2709':
-			self._logger.info("Pi 2")
+			self._logger.debug("Pi 2")
 			self.isRaspi = True
 		    elif match.group(1) == 'BCM2710':
-			self._logger.info("Pi 3")
+			self._logger.debug("Pi 3")
 			self.isRaspi = True
 
 		    if self.showPwrOneStatus or self.showPwrTwoStatus and self.isRaspi:
-			self._logger.info("Initialize GPOI")
+			self._logger.debug("Initialize GPOI")
 
 			# Set GPIO layout like pin-number
 			GPIO.setmode(GPIO.BOARD)
 
-			# Disable GPIO warnings
-			GPIO.setwarnings(False)
-
-			# Initialize the GPIO after restart
-                        GPIO.cleanup()
-
 			# Configure our GPIO outputs
-			GPIO.setup(11, GPIO.OUT)
-			GPIO.setup(12, GPIO.OUT)
+			GPIO.setup(self.inOnePin, GPIO.OUT)
+			GPIO.setup(self.inTwoPin, GPIO.OUT)
 
 			# Setup the initial state to high(off)
-			GPIO.output(11, GPIO.HIGH)
-			GPIO.output(12, GPIO.HIGH)
+			GPIO.output(self.inOnePin, GPIO.HIGH)
+			GPIO.output(self.inTwoPin, GPIO.HIGH)
 
-			self._logger.info("Start the timer now")
-			self.startTimer(10.0)
+			self._logger.debug("Start the timer now")
+			self.startTimer(self.rRate)
 
-		self._logger.info("Running on Pi? - %s" % self.isRaspi)
+		self._logger.debug("Running on Pi? - %s" % self.isRaspi)
+
+	##~~ ShutdownPlugin mixin
+	
+	def on_shutdown():
+		# GPIO cleanup
+		GPIO.cleanup()
 
 	def startTimer(self, interval):
 		self._checkPwrStatusTimer = RepeatedTimer(interval, self.checkPwrStatus, None, None, True)
@@ -93,13 +100,13 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 
 	def checkPwrStatus(self):
 		# Check the GPIO status of our relays and set our message
-		self.pwrOneStatus = GPIO.input(11)
+		self.pwrOneStatus = GPIO.input(self.inOnePin)
 		if self.pwrOneStatus:
 		    self.rOneMessage = "%s: %s" % (self.relayOneName, self.pwrOffName)
 		else:
 		    self.rOneMessage = "%s: %s" % (self.relayOneName, self.pwrOnName)
 
-		self.pwrTwoStatus = GPIO.input(12)
+		self.pwrTwoStatus = GPIO.input(self.inTwoPin)
 		if self.pwrTwoStatus:
                     self.rTwoMessage = "%s: %s" % (self.relayTwoName, self.pwrOffName)
                 else:
@@ -115,10 +122,13 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 
 	def get_settings_defaults(self):
 		return dict(
+			inOnePin="11",
+			inTwoPin="12",
 			pwrOnName="On",
 			pwrOffName="Off",
 			relayOneName="Printer",
 			relayTwoName="Light",
+			rRate="10",
 			showPwrOneStatus=True,
 			showPwrTwoStatus=False
 		)
@@ -126,16 +136,33 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 	def on_settings_save(self,data):
 		octoprint.plugin.SettingsPlugin.on_settings_save(self, data)
 
+		self.inOnePin = int(self._settings.get(["inOnePin"]))
+		self.inTwoPin = int(self._settings.get(["inTwoPin"]))
 		self.pwrOnName = self._settings.get(["pwrOnName"])
 		self.pwrOffName = self._settings.get(["pwrOffName"])
 		self.relayOneName = self._settings.get(["relayOneName"])
 		self.relayTwoName = self._settings.get(["relayTwoName"])
+		self.rRate = int(self._settings.get(["rRate"]))
 		self.showPwrOneStatus = self._settings.get(["showPwrOneStatus"])
 		self.showPwrTwoStatus = self._settings.get(["showPwrTwoStatus"])
 
 		if self.showPwrOneStatus or self.showPwrTwoStatus and self.isRaspi:
-		    interval = 10.0
-		    self.startTimer(interval)
+		    # Initialize the GPIO after a setting change
+                    GPIO.cleanup()
+
+		    # Set GPIO layout like pin-number
+                    GPIO.setmode(GPIO.BOARD)
+
+                    # Configure our GPIO outputs
+                    GPIO.setup(self.inOnePin, GPIO.OUT)
+                    GPIO.setup(self.inTwoPin, GPIO.OUT)
+
+                    # Setup the initial state to high(off)
+                    GPIO.output(self.inOnePin, GPIO.HIGH)
+                    GPIO.output(self.inTwoPin, GPIO.HIGH)
+
+		    # Start the timer
+		    self.startTimer(self.rRate)
 		else:
 		    if self._checkPwrStatusTimer is not None:
 			try:
@@ -176,9 +203,6 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 	##~~ Softwareupdate hook
 
 	def get_update_information(self):
-		# Define the configuration for your plugin to use with the Software Update
-		# Plugin here. See https://github.com/foosel/OctoPrint/wiki/Plugin:-Software-Update
-		# for details.
 		return dict(
 			powerinfo=dict(
 				displayName="Powerinfo Plugin",

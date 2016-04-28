@@ -1,0 +1,91 @@
+# German translations for PROJECT.
+# Copyright (C) 2016 Daniel Konrad / IT4Race GmbH
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <daniel.konrad@evolan.de>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Initial 0.3.0\n"
+"Report-Msgid-Bugs-To: daniel.konrad@evolan.de\n"
+"POT-Creation-Date: 2016-04-28 09:46+0200\n"
+"PO-Revision-Date: 2016-04-28 09:48+0200\n"
+"Last-Translator: Daniel Konrad <daniel.konrad@evolan.de>\n"
+"Language: de\n"
+"Language-Team: de <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.3\n"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:1
+msgid "Powerinfo settings for Raspberry Pi"
+msgstr "Raspberry Pi Powerinfo Einstellungen"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:2
+msgid ""
+"The plugin monitors the state of a 2 channel Raspberry Pi relay card "
+"(e.g. SainSmart)."
+msgstr "Das Plugin zeigt den Status einer 2 Kanal Relaiskarte an (z.B. SainSmart)."
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:4
+msgid "Input configuration"
+msgstr "Eingänge konfigurierren"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:5
+msgid "Specifiy the relay input pins on the pi (not the GPIO number)."
+msgstr "Wähle die Eingangspins für die Relais (nicht die GPIO Nummer)."
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:9
+msgid "relay 1 input pin"
+msgstr "Relais 1 Eingangspin"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:18
+msgid "relay 2 input pin"
+msgstr "Relais 2 Eingangspin"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:27
+msgid "Output configuration"
+msgstr "Konfiguration der Weboberfläche"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:28
+msgid ""
+"Specify the refresh rate of the plugin and the labels for the relays and "
+"states."
+msgstr "Wähle die Aktualisierungsrate der Relais für die Weboberfläche"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:29
+msgid "Refresh rates lower than 5 seconds might impact overall performance!"
+msgstr "Ein Rate unter 5 Sekunden kann die Gesamtgeschwindigkeit beeinträchtigen!"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:33
+msgid "refresh rate"
+msgstr "Aktualisierungsrate"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:37
+msgid "seconds"
+msgstr "Sekunden"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:42
+msgid "Label for power on"
+msgstr "Text für Relais Ein"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:48
+msgid "Label for power off"
+msgstr "Text für Relais Aus"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:54
+msgid "Label for relay 1"
+msgstr "Bezeichnung für Relais 1"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:60
+msgid "relay 1"
+msgstr "Relais 1"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:68
+msgid "Label for relay 2"
+msgstr "Bezeichnung für Relais 2"
+
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:74
+msgid "relay 2"
+msgstr "Relais 2"

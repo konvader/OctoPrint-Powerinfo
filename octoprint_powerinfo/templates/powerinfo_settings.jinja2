@@ -1,8 +1,8 @@
-<h4>Powerinfo settings for Raspberry Pi</h4>
-The plugin monitors the state of a 2 channel Raspberry Pi relay card (e.g. SainSmart).<br />
+<h4>{{ _('Powerinfo settings for Raspberry Pi') }}</h4>
+{{ _('The plugin monitors the state of a 2 channel Raspberry Pi relay card (e.g. SainSmart).') }}<br />
 <br />
-<h5>Input configuration</h5>
-Specifiy the relay input pins on the pi (not the GPIO number).<br />
+<h5>{{ _('Input configuration') }}</h5>
+{{ _('Specifiy the relay input pins on the pi (not the GPIO number).') }}<br />
 <br />
 <form class="form-horizontal">
     <div class="control-group">
@@ -24,9 +24,9 @@ Specifiy the relay input pins on the pi (not the GPIO number).<br />
         </div>
     </div>
 </form>
-<h5>Output configuration</h5>
-Specify the refresh rate of the plugin and the labels for the relays and states.<br />
-Refresh rates lower than 5 seconds might impact overall performance!<br />
+<h5>{{ _('Output configuration') }}</h5>
+{{ _('Specify the refresh rate of the plugin and the labels for the relays and states.') }}<br />
+{{ _('Refresh rates lower than 5 seconds might impact overall performance!') }}<br />
 <br />
 <form class="form-horizontal">
     <div class="control-group">
@@ -34,7 +34,7 @@ Refresh rates lower than 5 seconds might impact overall performance!<br />
         <div class="controls">
             <div class="input-append">
                 <input type="number" step="1" min="1" max="30" class="input-mini text-right" data-bind="value: settings.plugins.powerinfo.rRate">
-                <span class="add-on">seconds</span>
+                <span class="add-on">{{ _('seconds') }}</span>
             </div>
         </div>
     </div>

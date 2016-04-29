@@ -34,6 +34,24 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 		self.showPwrOneStatus = False
 		self.showPwrTwoStatus = False
 
+	##~~ Plugin helper
+
+	def __plugin_load__():
+		plugin = PowerinfoPlugin()
+
+		global __plugin_implementation__
+		__plugin_implementation__ = plugin
+
+		global __plugin_helper__
+		__plugin_helpers__ = dict(
+		    inOnePin=plugin.inOnePin,
+		    inTwoPin=plugin.inTwoPin,
+		    pwrOnName=plugin.pwrOnName,
+		    pwrOffName=plugin.pwrOffName,
+		    relayOneName=plugin.relayOneName,
+		    relayTwoName=plugin.relayTwoName
+		)
+
 	##~~ StartupPlugin mixin
 
 	def on_after_startup(self):
@@ -145,6 +163,16 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 		self.rRate = int(self._settings.get(["rRate"]))
 		self.showPwrOneStatus = self._settings.get(["showPwrOneStatus"])
 		self.showPwrTwoStatus = self._settings.get(["showPwrTwoStatus"])
+
+		# Update the plugin helpers
+		__plugin_helpers__.update(dict(
+                    inOnePin=plugin.inOnePin,
+                    inTwoPin=plugin.inTwoPin,
+                    pwrOnName=plugin.pwrOnName,
+                    pwrOffName=plugin.pwrOffName,
+                    relayOneName=plugin.relayOneName,
+                    relayTwoName=plugin.relayTwoName 
+                ))
 
 		if self.showPwrOneStatus or self.showPwrTwoStatus and self.isRaspi:
 		    # Initialize the GPIO after a setting change

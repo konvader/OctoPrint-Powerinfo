@@ -33,10 +33,10 @@ Add system actions to your ~/.octoprint/config.yaml to control the printer like 
 
 system:
   actions:
-  - action: printer on
+  \- action: printer on
     command: gpio -g write 17 0
     name: Turn on the printer
-  - action: printer off
+  \- action: printer off
     command: gpio -g write 17 1
     confirm: You are about to turn off the printer.
     name: Turn off the printer

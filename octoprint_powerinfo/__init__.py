@@ -34,23 +34,18 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 		self.showPwrOneStatus = False
 		self.showPwrTwoStatus = False
 
-	##~~ Plugin helper
-
-	def __plugin_load__():
-		plugin = PowerinfoPlugin()
-
-		global __plugin_implementation__
-		__plugin_implementation__ = plugin
-
-		global __plugin_helper__
-		__plugin_helpers__ = dict(
-		    inOnePin=plugin.inOnePin,
-		    inTwoPin=plugin.inTwoPin,
-		    pwrOnName=plugin.pwrOnName,
-		    pwrOffName=plugin.pwrOffName,
-		    relayOneName=plugin.relayOneName,
-		    relayTwoName=plugin.relayTwoName
-		)
+                global __plugin_helpers__
+                __plugin_helpers__ = dict(
+                    inOnePin=self.inOnePin,
+                    inTwoPin=self.inTwoPin,
+                    isRaspi=self.isRaspi,
+                    pwrOnName=self.pwrOnName,
+                    pwrOffName=self.pwrOffName,
+                    relayOneName=self.relayOneName,
+                    relayTwoName=self.relayTwoName,
+                    showPwrOneRelay=self.showPwrOneStatus,
+                    showPwrTwoRelay=self.showPwrTwoStatus
+                )
 
 	##~~ StartupPlugin mixin
 
@@ -106,6 +101,19 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 
 		self._logger.debug("Running on Pi? - %s" % self.isRaspi)
 
+		# Update the plugin helpers
+                __plugin_helpers__.update(dict(
+                    inOnePin=self.inOnePin,
+                    inTwoPin=self.inTwoPin,
+                    isRaspi=self.isRaspi,
+                    pwrOnName=self.pwrOnName,
+                    pwrOffName=self.pwrOffName,
+                    relayOneName=self.relayOneName,
+                    relayTwoName=self.relayTwoName,
+                    showPwrOneRelay=self.showPwrOneStatus,
+                    showPwrTwoRelay=self.showPwrTwoStatus
+                ))
+
 	##~~ ShutdownPlugin mixin
 	
 	def on_shutdown():
@@ -130,7 +138,7 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
                 else:
                     self.rTwoMessage = "%s: %s" % (self.relayTwoName, self.pwrOnName)
 
-		# Sent our status message
+		# Send our status message
 		self._plugin_manager.send_plugin_message(self._identifier, dict(messageOne=self.rOneMessage,
 										messageOneShow=self.showPwrOneStatus,
 										messageTwo=self.rTwoMessage,
@@ -166,12 +174,15 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 
 		# Update the plugin helpers
 		__plugin_helpers__.update(dict(
-                    inOnePin=plugin.inOnePin,
-                    inTwoPin=plugin.inTwoPin,
-                    pwrOnName=plugin.pwrOnName,
-                    pwrOffName=plugin.pwrOffName,
-                    relayOneName=plugin.relayOneName,
-                    relayTwoName=plugin.relayTwoName 
+                    inOnePin=self.inOnePin,
+                    inTwoPin=self.inTwoPin,
+                    isRaspi=self.isRaspi,
+                    pwrOnName=self.pwrOnName,
+                    pwrOffName=self.pwrOffName,
+                    relayOneName=self.relayOneName,
+                    relayTwoName=self.relayTwoName,
+                    showPwrOneRelay=self.showPwrOneStatus,
+                    showPwrTwoRelay=self.showPwrTwoStatus
                 ))
 
 		if self.showPwrOneStatus or self.showPwrTwoStatus and self.isRaspi:

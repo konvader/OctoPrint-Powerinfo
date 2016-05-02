@@ -9,7 +9,6 @@ import RPi.GPIO as GPIO
 import sys
 
 class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
-		      octoprint.plugin.ShutdownPlugin,
 		      octoprint.plugin.SettingsPlugin,
                       octoprint.plugin.AssetPlugin,
                       octoprint.plugin.TemplatePlugin,
@@ -33,19 +32,6 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 		self.rTwoMessage = ""
 		self.showPwrOneStatus = False
 		self.showPwrTwoStatus = False
-
-                global __plugin_helpers__
-                __plugin_helpers__ = dict(
-                    inOnePin=self.inOnePin,
-                    inTwoPin=self.inTwoPin,
-                    isRaspi=self.isRaspi,
-                    pwrOnName=self.pwrOnName,
-                    pwrOffName=self.pwrOffName,
-                    relayOneName=self.relayOneName,
-                    relayTwoName=self.relayTwoName,
-                    showPwrOneRelay=self.showPwrOneStatus,
-                    showPwrTwoRelay=self.showPwrTwoStatus
-                )
 
 	##~~ StartupPlugin mixin
 
@@ -101,24 +87,16 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 
 		self._logger.debug("Running on Pi? - %s" % self.isRaspi)
 
-		# Update the plugin helpers
-                __plugin_helpers__.update(dict(
+	    	# Update the plugin helpers
+            	__plugin_helpers__.update(dict(
                     inOnePin=self.inOnePin,
                     inTwoPin=self.inTwoPin,
                     isRaspi=self.isRaspi,
-                    pwrOnName=self.pwrOnName,
-                    pwrOffName=self.pwrOffName,
                     relayOneName=self.relayOneName,
                     relayTwoName=self.relayTwoName,
                     showPwrOneRelay=self.showPwrOneStatus,
                     showPwrTwoRelay=self.showPwrTwoStatus
-                ))
-
-	##~~ ShutdownPlugin mixin
-	
-	def on_shutdown():
-		# GPIO cleanup
-		GPIO.cleanup()
+            	))
 
 	def startTimer(self, interval):
 		self._checkPwrStatusTimer = RepeatedTimer(interval, self.checkPwrStatus, None, None, True)
@@ -177,8 +155,6 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
                     inOnePin=self.inOnePin,
                     inTwoPin=self.inTwoPin,
                     isRaspi=self.isRaspi,
-                    pwrOnName=self.pwrOnName,
-                    pwrOffName=self.pwrOffName,
                     relayOneName=self.relayOneName,
                     relayTwoName=self.relayTwoName,
                     showPwrOneRelay=self.showPwrOneStatus,
@@ -261,10 +237,23 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 __plugin_name__ = "Powerinfo Plugin"
 
 def __plugin_load__():
+	plugin = PowerinfoPlugin()
+
 	global __plugin_implementation__
-	__plugin_implementation__ = PowerinfoPlugin()
+	__plugin_implementation__ = plugin
 
 	global __plugin_hooks__
 	__plugin_hooks__ = {
 		"octoprint.plugin.softwareupdate.check_config": __plugin_implementation__.get_update_information
 	}
+
+	global __plugin_helpers__
+        __plugin_helpers__ = dict(
+            inOnePin=plugin.inOnePin,
+            inTwoPin=plugin.inTwoPin,
+            isRaspi=plugin.isRaspi,
+            relayOneName=plugin.relayOneName,
+            relayTwoName=plugin.relayTwoName,
+            showPwrOneRelay=plugin.showPwrOneStatus,
+            showPwrTwoRelay=plugin.showPwrTwoStatus
+	)

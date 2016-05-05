@@ -7,10 +7,10 @@ Errors can be fatal, so if you do not know !exactly! what you are doing, you sho
 
 ## Description
 
-Powerinfo is a plugin for OctoPi to monitor the state of a 2 channel relay card (e.g. SainSmart)
+Powerinfo is a plugin for OctoPi to monitor the state of a 2 channel relay card (e.g. SainSmart).
 You are able to configure input and output values for each relay within the settings. Changes will
 take effect as soon as you click the Save button inside the Settings section. It is compatible
-to all hardware revision of Raspberry Pi including Pi3.
+to all hardware revisions of Raspberry Pi including Pi3.
 
 ## Setup
 
@@ -29,17 +29,25 @@ or manually using this URL:
 
 ## Relay control
 
+#NEW#
+
+You can download the Powercontrol plugin to get the controls inside the sidebar as well.
+
+#NEW#
+
+or, if you want to use the old way use the following instructions ->
+
 Add system actions to your ~/.octoprint/config.yaml to control the printer like the following example:
 
-system:
-  actions:
-  \- action: printer on
-    command: gpio -g write 17 0
-    name: Turn on the printer
-  \- action: printer off
-    command: gpio -g write 17 1
-    confirm: You are about to turn off the printer.
-    name: Turn off the printer
+| system:
+|   actions:
+|   - action: printer on
+|     command: gpio -g write 17 0
+|     name: Turn on the printer
+|   - action: printer off
+|     command: gpio -g write 17 1
+|     confirm: You are about to turn off the printer.
+|     name: Turn off the printer
 
 Note: As we've initialized our GPIOs within the plugin, it is not necessary to do this anywhere else!
       The command has to be executed on the GPIO number here. Within the settings you have to use

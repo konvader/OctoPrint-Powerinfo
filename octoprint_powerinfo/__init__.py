@@ -47,7 +47,17 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
                 self.showPwrOneStatus = self._settings.get(["showPwrOneStatus"])
                 self.showPwrTwoStatus = self._settings.get(["showPwrTwoStatus"])
 
-		self._logger.debug("Powerinfo plugin started")
+		# Update the plugin helpers
+                __plugin_helpers__.update(dict(
+                    inOnePin=self.inOnePin,
+                    inTwoPin=self.inTwoPin,
+                    relayOneName=self.relayOneName,
+                    relayTwoName=self.relayTwoName,
+                    showPwrOneRelay=self.showPwrOneStatus,
+                    showPwrTwoRelay=self.showPwrTwoStatus
+                ))
+
+		self._logger.info("Powerinfo plugin started")
 
 		if sys.platform == "linux2":
 		    with open('/proc/cpuinfo', 'r') as infile:
@@ -86,17 +96,6 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 			self.startTimer(self.rRate)
 
 		self._logger.debug("Running on Pi? - %s" % self.isRaspi)
-
-	    	# Update the plugin helpers
-            	__plugin_helpers__.update(dict(
-                    inOnePin=self.inOnePin,
-                    inTwoPin=self.inTwoPin,
-                    isRaspi=self.isRaspi,
-                    relayOneName=self.relayOneName,
-                    relayTwoName=self.relayTwoName,
-                    showPwrOneRelay=self.showPwrOneStatus,
-                    showPwrTwoRelay=self.showPwrTwoStatus
-            	))
 
 	def startTimer(self, interval):
 		self._checkPwrStatusTimer = RepeatedTimer(interval, self.checkPwrStatus, None, None, True)
@@ -154,7 +153,6 @@ class PowerinfoPlugin(octoprint.plugin.StartupPlugin,
 		__plugin_helpers__.update(dict(
                     inOnePin=self.inOnePin,
                     inTwoPin=self.inTwoPin,
-                    isRaspi=self.isRaspi,
                     relayOneName=self.relayOneName,
                     relayTwoName=self.relayTwoName,
                     showPwrOneRelay=self.showPwrOneStatus,
@@ -251,7 +249,6 @@ def __plugin_load__():
         __plugin_helpers__ = dict(
             inOnePin=plugin.inOnePin,
             inTwoPin=plugin.inTwoPin,
-            isRaspi=plugin.isRaspi,
             relayOneName=plugin.relayOneName,
             relayTwoName=plugin.relayTwoName,
             showPwrOneRelay=plugin.showPwrOneStatus,

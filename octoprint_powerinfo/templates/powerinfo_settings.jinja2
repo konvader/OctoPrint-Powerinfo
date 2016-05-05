@@ -24,7 +24,7 @@
         </div>
     </div>
 </form>
-<h5>{{ _('Output configuration') }}</h5>
+<h5>{{ _('Web-Interface configuration') }}</h5>
 {{ _('Specify the refresh rate of the plugin and the labels for the relays and states.') }}<br />
 {{ _('Refresh rates lower than 5 seconds might impact overall performance!') }}<br />
 <br />
@@ -60,7 +60,7 @@
         <label class="control-label">{{ _('relay 1') }}</label>
         <div class="controls">
             <label class="checkbox">
-                <input type="checkbox" data-bind="checked: settings.plugins.powerinfo.showPwrOneStatus"> Show the status      
+                <input type="checkbox" data-bind="checked: settings.plugins.powerinfo.showPwrOneStatus">{{ _('Show the status') }}
             </label>
         </div>
     </div>
@@ -74,7 +74,7 @@
         <label class="control-label">{{ _('relay 2') }}</label>
         <div class="controls">
             <label class="checkbox">
-                <input type="checkbox" data-bind="checked: settings.plugins.powerinfo.showPwrTwoStatus"> Show the status
+                <input type="checkbox" data-bind="checked: settings.plugins.powerinfo.showPwrTwoStatus">{{ _('Show the status') }}
             </label>
          </div>
     </div>

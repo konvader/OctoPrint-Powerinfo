@@ -1,13 +1,13 @@
-# German translations for PROJECT.
+# German translations for Initial.
 # Copyright (C) 2016 Daniel Konrad / IT4Race GmbH
-# This file is distributed under the same license as the PROJECT project.
+# This file is distributed under the same license as the Initial project.
 # FIRST AUTHOR <daniel.konrad@evolan.de>, 2016.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Initial 0.3.0\n"
 "Report-Msgid-Bugs-To: daniel.konrad@evolan.de\n"
-"POT-Creation-Date: 2016-04-28 09:46+0200\n"
+"POT-Creation-Date: 2016-05-05 18:19+0200\n"
 "PO-Revision-Date: 2016-04-28 09:48+0200\n"
 "Last-Translator: Daniel Konrad <daniel.konrad@evolan.de>\n"
 "Language: de\n"
@@ -45,7 +45,7 @@ msgid "relay 2 input pin"
 msgstr "Relais 2 Eingangspin"
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:27
-msgid "Output configuration"
+msgid "Web-Interface configuration"
 msgstr "Konfiguration der Weboberfläche"
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:28
@@ -56,7 +56,7 @@ msgstr "Wähle die Aktualisierungsrate der Relais für die Weboberfläche"
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:29
 msgid "Refresh rates lower than 5 seconds might impact overall performance!"
-msgstr "Ein Rate unter 5 Sekunden kann die Gesamtgeschwindigkeit beeinträchtigen!"
+msgstr "Ein Rate unter 5 Sekunden kann die Systemgeschwindigkeit beeinträchtigen!"
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:33
 msgid "refresh rate"
@@ -82,6 +82,11 @@ msgstr "Bezeichnung für Relais 1"
 msgid "relay 1"
 msgstr "Relais 1"
 
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:63
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:77
+msgid "Show the status"
+msgstr "Zeige das Relais in der Oberfläche"
+
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:68
 msgid "Label for relay 2"
 msgstr "Bezeichnung für Relais 2"
@@ -89,3 +94,6 @@ msgstr "Bezeichnung für Relais 2"
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:74
 msgid "relay 2"
 msgstr "Relais 2"
+
+#~ msgid "Output configuration"
+#~ msgstr "Konfiguration der Weboberfläche"

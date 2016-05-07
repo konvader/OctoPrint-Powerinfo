@@ -2,11 +2,11 @@
 {{ _('The plugin monitors the state of a 2 channel Raspberry Pi relay card (e.g. SainSmart).') }}<br />
 <br />
 <h5>{{ _('Input configuration') }}</h5>
-{{ _('Specifiy the relay input pins on the pi (not the GPIO number).') }}<br />
+{{ _('Specifiy the relay input pin on the pi (not the GPIO number).') }}<br />
 <br />
 <form class="form-horizontal">
     <div class="control-group">
-        <label class="control-label">{{ _('relay 1 input pin') }}</label>
+        <label class="control-label">{{ _('relay 1') }}</label>
         <div class="controls">
             <div class="input-append">
                 <input type="number" step="1" min="1" max="40" class="input-mini text-right" data-bind="value: settings.plugins.powerinfo.inOnePin">
@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('relay 2 input pin') }}</label>
+        <label class="control-label">{{ _('relay 2') }}</label>
         <div class="controls">
             <div class="input-append">
                 <input type="number" step="1" min="1" max="40" class="input-mini text-right" data-bind="value: settings.plugins.powerinfo.inTwoPin">
@@ -25,7 +25,7 @@
     </div>
 </form>
 <h5>{{ _('Web-Interface configuration') }}</h5>
-{{ _('Specify the refresh rate of the plugin and the labels for the relays and states.') }}<br />
+{{ _('Specify the refresh rate of the plugin as well as the labels for the relays and states.') }}<br />
 {{ _('Refresh rates lower than 5 seconds might impact overall performance!') }}<br />
 <br />
 <form class="form-horizontal">
@@ -57,10 +57,9 @@
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('relay 1') }}</label>
         <div class="controls">
             <label class="checkbox">
-                <input type="checkbox" data-bind="checked: settings.plugins.powerinfo.showPwrOneStatus">{{ _('Show the status') }}
+                <input type="checkbox" data-bind="checked: settings.plugins.powerinfo.showPwrOneStatus">{{ _('Show the relay state') }}
             </label>
         </div>
     </div>
@@ -71,10 +70,9 @@
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">{{ _('relay 2') }}</label>
         <div class="controls">
             <label class="checkbox">
-                <input type="checkbox" data-bind="checked: settings.plugins.powerinfo.showPwrTwoStatus">{{ _('Show the status') }}
+                <input type="checkbox" data-bind="checked: settings.plugins.powerinfo.showPwrTwoStatus">{{ _('Show the relay state') }}
             </label>
          </div>
     </div>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Initial 0.3.0\n"
 "Report-Msgid-Bugs-To: daniel.konrad@evolan.de\n"
-"POT-Creation-Date: 2016-05-05 18:19+0200\n"
+"POT-Creation-Date: 2016-05-07 12:42+0200\n"
 "PO-Revision-Date: 2016-04-28 09:48+0200\n"
 "Last-Translator: Daniel Konrad <daniel.konrad@evolan.de>\n"
 "Language: de\n"
@@ -30,19 +30,19 @@ msgstr "Das Plugin zeigt den Status einer 2 Kanal Relaiskarte an (z.B. SainSmart
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:4
 msgid "Input configuration"
-msgstr "Eingänge konfigurierren"
+msgstr "Eingänge konfigurieren"
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:5
-msgid "Specifiy the relay input pins on the pi (not the GPIO number)."
-msgstr "Wähle die Eingangspins für die Relais (nicht die GPIO Nummer)."
+msgid "Specifiy the relay input pin on the pi (not the GPIO number)."
+msgstr "Wähle den Eingangspin für die Relais (nicht die GPIO Nummer)."
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:9
-msgid "relay 1 input pin"
-msgstr "Relais 1 Eingangspin"
+msgid "relay 1"
+msgstr "Relais 1"
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:18
-msgid "relay 2 input pin"
-msgstr "Relais 2 Eingangspin"
+msgid "relay 2"
+msgstr "Relais 2"
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:27
 msgid "Web-Interface configuration"
@@ -50,9 +50,9 @@ msgstr "Konfiguration der Weboberfläche"
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:28
 msgid ""
-"Specify the refresh rate of the plugin and the labels for the relays and "
-"states."
-msgstr "Wähle die Aktualisierungsrate der Relais für die Weboberfläche"
+"Specify the refresh rate of the plugin as well as the labels for the "
+"relays and states."
+msgstr "Wähle die Aktualisierungsrate der Relais in der Weboberfläche."
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:29
 msgid "Refresh rates lower than 5 seconds might impact overall performance!"
@@ -78,22 +78,12 @@ msgstr "Text für Relais Aus"
 msgid "Label for relay 1"
 msgstr "Bezeichnung für Relais 1"
 
-#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:60
-msgid "relay 1"
-msgstr "Relais 1"
-
-#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:63
-#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:77
-msgid "Show the status"
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:62
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:75
+msgid "Show the relay state"
 msgstr "Zeige das Relais in der Oberfläche"
 
-#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:68
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:67
 msgid "Label for relay 2"
 msgstr "Bezeichnung für Relais 2"
 
-#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:74
-msgid "relay 2"
-msgstr "Relais 2"
-
-#~ msgid "Output configuration"
-#~ msgstr "Konfiguration der Weboberfläche"

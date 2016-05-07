@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-05 18:19+0200\n"
+"POT-Creation-Date: 2016-05-07 12:42+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,15 +32,15 @@ msgid "Input configuration"
 msgstr ""
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:5
-msgid "Specifiy the relay input pins on the pi (not the GPIO number)."
+msgid "Specifiy the relay input pin on the pi (not the GPIO number)."
 msgstr ""
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:9
-msgid "relay 1 input pin"
+msgid "relay 1"
 msgstr ""
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:18
-msgid "relay 2 input pin"
+msgid "relay 2"
 msgstr ""
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:27
@@ -49,8 +49,8 @@ msgstr ""
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:28
 msgid ""
-"Specify the refresh rate of the plugin and the labels for the relays and "
-"states."
+"Specify the refresh rate of the plugin as well as the labels for the "
+"relays and states."
 msgstr ""
 
 #: octoprint_powerinfo/templates/powerinfo_settings.jinja2:29
@@ -77,20 +77,12 @@ msgstr ""
 msgid "Label for relay 1"
 msgstr ""
 
-#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:60
-msgid "relay 1"
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:62
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:75
+msgid "Show the relay state"
 msgstr ""
 
-#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:63
-#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:77
-msgid "Show the status"
-msgstr ""
-
-#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:68
+#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:67
 msgid "Label for relay 2"
-msgstr ""
-
-#: octoprint_powerinfo/templates/powerinfo_settings.jinja2:74
-msgid "relay 2"
 msgstr ""
 

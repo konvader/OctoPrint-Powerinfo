@@ -37,15 +37,23 @@ or, if you want to use the old way use the following instructions ->
 
 Add system actions to your ~/.octoprint/config.yaml to control the printer like the following example:
 
-. system:
-.   actions:
-.   - action: printer on
-.     command: gpio -g write 17 0
-.     name: Turn on the printer
-.   - action: printer off
-.     command: gpio -g write 17 1
-.     confirm: You are about to turn off the printer.
-.     name: Turn off the printer
+system:
+
+  actions:
+
+  - action: printer on
+
+    command: gpio -g write 17 0
+
+    name: Turn on the printer
+
+  - action: printer off
+
+    command: gpio -g write 17 1
+
+    confirm: You are about to turn off the printer.
+
+    name: Turn off the printer
 
 Note: As we've initialized our GPIOs within the plugin, it is not necessary to do this anywhere else!
       The command has to be executed on the GPIO number here. Within the settings you have to use
